@@ -1,8 +1,17 @@
 def buscar_dicionario(dicionario:dict, alvo:str) -> dict:
     '''Buscar um dicionário e retorna-lo.'''
-    for chave in list(dicionario):
-        if chave == alvo:
-            return {chave : dicionario[chave]}
+    lista = list(dicionario)
+    lista.sort()
+    inicio = 0
+    fim = len(lista) - 1
+    while fim != 0:
+        meio = (inicio + fim) // 2
+        if lista[meio] == alvo:
+            return {alvo : dicionario[alvo]}
+        elif lista[meio] < alvo:
+            inicio = meio + 1
+        else:
+            fim = meio - 1
     return {}
 
 def subtrair_dicionarios(dicionario_1:dict, dicionario_2:dict) -> dict:

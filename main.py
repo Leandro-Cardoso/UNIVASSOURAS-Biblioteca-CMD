@@ -2,7 +2,7 @@ from os import system
 
 from config import USUARIO_ADMIN, SENHA_ADMIN
 from formatacao import formatar_tela, formatar_menu, formatar_dicionario
-from dicionarios import somar_dicionarios, subtrair_dicionarios, buscar_dicionario
+from dicionario import somar_dicionarios, subtrair_dicionarios, buscar_dicionario
 
 def buscar_usuario(usuarios:dict) -> None:
     '''Exibe o resultado da busca de um usuário.'''

@@ -1,7 +1,8 @@
+from sort import merge_sort
+
 def buscar_dicionario(dicionario:dict, alvo:str) -> dict:
     '''Buscar um dicionário e retorna-lo.'''
-    lista = list(dicionario)
-    lista.sort()
+    lista = merge_sort(list(dicionario))
     inicio = 0
     fim = len(lista) - 1
     while fim != 0:

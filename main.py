@@ -1,6 +1,6 @@
 from os import system
 
-from config import USUARIO_ADMIN, SENHA_ADMIN
+from config import ADMIN_USER, ADMIN_PASS
 from formatacao import formatar_tela, formatar_menu, formatar_dicionario
 from log import log, log_erro
 from dicionario import somar_dicionarios, subtrair_dicionarios, buscar_dicionario
@@ -81,7 +81,7 @@ def remover_usuario(usuarios:dict) -> dict:
         system('cls')
         print(tela)
         usuario = input(' Usuário: ')
-        if usuario == USUARIO_ADMIN:
+        if usuario == ADMIN_USER:
             erro = 'O usuário administrador não pode ser removido.'
         elif usuario in list(usuarios):
             usuario = buscar_dicionario(usuarios, usuario)
@@ -324,7 +324,7 @@ def login(usuarios:dict) -> str:
             log_erro('tentou logar no sistema', usuario)
 
 def main() -> None:
-    usuarios = {USUARIO_ADMIN : SENHA_ADMIN}
+    usuarios = {ADMIN_USER : ADMIN_PASS}
     livros = {}
     reservados = {}
     usuario_logado = login(usuarios)
@@ -332,7 +332,7 @@ def main() -> None:
     erro = None
     while True:
         opcoes = ['sair' ,'relogar', 'registrar livros', 'remover livros', 'listar livros', 'buscar livro', 'reservar livro', 'devolver livro', 'listar reservados']
-        if usuario_logado == USUARIO_ADMIN:
+        if usuario_logado == ADMIN_USER:
             opcoes.append('gerenciar usuários (admin)')
         menu = formatar_menu(opcoes)
         tela = formatar_tela(titulo = titulo, menu = menu, erro = erro)
@@ -359,7 +359,7 @@ def main() -> None:
             livros, reservados = devolver_livro(livros, reservados)
         elif opcao == '9':
             listar_reservados(reservados)
-        elif opcao == '10' and usuario_logado == USUARIO_ADMIN:
+        elif opcao == '10' and usuario_logado == ADMIN_USER:
             usuarios = gerenciar_usuarios(usuarios)
         else:
             erro = 'Opção inválida! Digite o número referente a opção desejada.'

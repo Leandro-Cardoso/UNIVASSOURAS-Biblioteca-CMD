@@ -4,8 +4,6 @@ import textwrap
 def draw_title(title:str, screen_width:int) -> None:
     h = '|'
     s = ':'
-    if title is not str:
-        title = str(title)
     title = title.upper()
     title = f'{h} {title} {h}'
     title = f'\n{title:{s}^{screen_width}}'

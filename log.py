@@ -1,17 +1,28 @@
 from datetime import datetime
 from os import path
 
-from config import RAIZ_LOG, EXTENSAO_LOG
+from config import LOG_ROOT, LOG_EXTENSION
 
-def salvar_log(mensagem:str) -> None:
+def log(text:str, user:str = '') -> None:
     '''Salva o log em um arquivo TXT.'''
-    mensagem = mensagem.capitalize()
-    if not mensagem.endswith('.'):
-        mensagem += '.'
-    agora = datetime.now()
-    data = agora.strftime('%Y-%m-%d')
-    tempo = agora.strftime('%H : %M : %S')
-    nome_arquivo = data + '.' + EXTENSAO_LOG
-    caminho_arquivo = path.join(path.basename(RAIZ_LOG), path.basename(nome_arquivo))
-    with open(caminho_arquivo, 'a', encoding = 'UTF-8') as file:
-        file.write(f'{tempo} -> {mensagem}\n')
+    words = text.split(' ')
+    if '[ERRO]' in words:
+        i = 1
+    else:
+        i = 0
+    words[i] = words[i].capitalize()
+    text = ' '.join(words)
+    if not text.endswith('.'):
+        text += '.'
+    now = datetime.now()
+    date = now.strftime('%Y-%m-%d')
+    time = now.strftime('%H:%M:%S')
+    file_name = date + '.' + LOG_EXTENSION
+    file_path = path.join(path.basename(LOG_ROOT), path.basename(file_name))
+    with open(file_path, 'a', encoding = 'UTF-8') as file:
+        file.write(f'{time} ({user}) -> {text}\n')
+
+def log_erro(text:str, user:str = '') -> None:
+    '''Salva o log de erro em um arquivo TXT.'''
+    text = f'[ERRO] {text}'
+    log(text, user)

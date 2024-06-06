@@ -2,6 +2,7 @@ from os import system
 
 from config import USUARIO_ADMIN, SENHA_ADMIN
 from formatacao import formatar_tela, formatar_menu, formatar_dicionario
+from log import log, log_erro
 from dicionario import somar_dicionarios, subtrair_dicionarios, buscar_dicionario
 
 def buscar_usuario(usuarios:dict) -> None:
@@ -268,7 +269,7 @@ def remover_livros(livros:dict) -> dict:
             erro = 'Valor inválido! A quantidade precisa ser um número inteiro.'
     return livros
 
-def registrar_livros(livros:dict) -> dict:
+def registrar_livros(livros:dict, usuario:str) -> dict:
     '''Registra novos livros e retorna um novo dicionário.'''
     titulo = 'registrar livros'
     erro = None
@@ -278,15 +279,30 @@ def registrar_livros(livros:dict) -> dict:
         system('cls')
         print(tela)
         livro = input(' Livro: ')
-        livro = livro.title()
+        if livro == '':
+            erro = 'O campo livro não pode ficar vazio.'
+            log_erro('erro: não inseriu um nome de livro', usuario)
+        else:
+            livro = livro.title()
+            break
+    while True:
+        tela = formatar_tela(titulo = titulo, erro = erro)
+        erro = None
+        system('cls')
+        print(tela)
         quantidade = input(' Quantidade: ')
         try:
             quantidade = int(quantidade)
-            novo_livro = {livro : quantidade}
-            livros = somar_dicionarios(livros, novo_livro)
-            break
-        except:
+            if quantidade > 0:
+                novo_livro = {livro : quantidade}
+                livros = somar_dicionarios(livros, novo_livro)
+                break
+            else:
+                erro = 'Valor inválido! A quantidade precisa ser um número maior que zero.'
+                log_erro('erro: inseriu uma quantidade de livro menor que 1', usuario)
+        except Exception as e:
             erro = 'Valor inválido! A quantidade precisa ser um número inteiro.'
+            log_erro('erro: inseriu uma quantidade de livro que não é um número inteiro', usuario)
     return livros
 
 def login(usuarios:dict) -> str:
@@ -301,9 +317,11 @@ def login(usuarios:dict) -> str:
         usuario = input(' Usuário: ')
         senha = input(' Senha: ')
         if usuario in list(usuarios) and usuarios[usuario] == senha:
+                log('logou no sistema', usuario)
                 return usuario
         else:
             erro = 'Usuário ou senha incorretos.'
+            log_erro('tentou logar no sistema', usuario)
 
 def main() -> None:
     usuarios = {USUARIO_ADMIN : SENHA_ADMIN}
@@ -323,11 +341,12 @@ def main() -> None:
         print(tela)
         opcao = input(' Opção: ')
         if opcao == '1':
+            log('fechou o sistema', usuario_logado)
             break
         elif opcao == '2':
             usuario_logado = login(usuarios)
         elif opcao == '3':
-            livros = registrar_livros(livros)
+            livros = registrar_livros(livros, usuario_logado)
         elif opcao == '4':
             livros = remover_livros(livros)
         elif opcao == '5':
@@ -344,6 +363,7 @@ def main() -> None:
             usuarios = gerenciar_usuarios(usuarios)
         else:
             erro = 'Opção inválida! Digite o número referente a opção desejada.'
+            log_erro('selecionou uma opção inválida', usuario_logado)
     system('cls')
     print('\nVolte sempre !!!\n')
 

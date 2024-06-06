@@ -3,5 +3,5 @@ USUARIO_ADMIN = 'Leandro'
 SENHA_ADMIN = '2510'
 
 # CONFIGURAÇÕES DE LOG:
-RAIZ_LOG = 'logs'
-EXTENSAO_LOG = 'txt'
+LOG_ROOT = 'logs'
+LOG_EXTENSION = 'txt'

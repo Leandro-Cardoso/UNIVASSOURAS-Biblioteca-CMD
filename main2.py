@@ -50,7 +50,6 @@ def main() -> None:
             erro = None
         # OPTIONS:
         if choiced == 1:
-            log('saiu do sistema', username)
             exit(username)
             break
         if choiced == 2:

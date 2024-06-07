@@ -1,18 +1,29 @@
 from screen import draw_screen
 from choice import make_choice
+from log import log
+
+def exit(username:str) -> None:
+    title = 'biblioteca'
+    infos = f'obrigado {username} por utilizar nosso sistema. volte sempre'
+    draw_screen(title, infos)
+    print()
 
 def login(user:dict) -> dict:
     pass
 
 def main_menu(user:dict) -> None:
+    # SCREEN:
     title = 'menu principal'
-    options = [
+    username = ''
+    erro = None
+    while True:
+        options = [
         'sair',
         'logar'
         ]
-    while True:
         if user:
-            infos = f'bem vindo {user}. selecione uma das opções de serviços abaixo'
+            username = user['name']
+            infos = f'bem vindo {username}. selecione uma das opções de serviços abaixo'
             options.append(
                 'editar conta',
                 'minhas reservas',
@@ -31,11 +42,16 @@ def main_menu(user:dict) -> None:
                 'criar conta'
             )
             infos = 'faça o login ou registre-se para ter acesso aos nossos serviços'
-        draw_screen(title, infos, options)
+        draw_screen(title, infos, options, erro)
+        # CHOICE:
         if user:
-            make_choice(options, user['name'])
+            choiced, erro = make_choice(options, username)
         else:
-            make_choice(options)
+            choiced, erro = make_choice(options)
+        if choiced == 1:
+            log('saiu do sistema', username)
+            exit(username)
+            break
 
 def main() -> None:
     user = None

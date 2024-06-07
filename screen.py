@@ -14,11 +14,13 @@ def draw_infos(infos:str, screen_width:int) -> None:
     infos = ''
     for sentence in sentences:
         if sentence != '':
+            if sentence.startswith(' '):
+                sentence = sentence[1:]
             words = sentence.split(' ')
             words[0] = words[0].capitalize()
             sentence = ' '.join(words)
             sentence = f'\t{sentence}.'
-            sentence = textwrap.fill(sentence, width = screen_width, subsequent_indent = ' ')
+            sentence = textwrap.fill(sentence, width = screen_width)
             infos += f'\n{sentence}'
     print(infos)
 

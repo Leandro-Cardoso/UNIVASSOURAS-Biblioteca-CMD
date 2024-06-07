@@ -2,37 +2,28 @@ from screen import draw_screen
 from choice import make_choice
 from log import log
 
-def exit(username:str) -> None:
-    # SCREEN:
-    title = 'biblioteca'
-    infos = f'obrigado {username} por utilizar nosso sistema. volte sempre'
-    draw_screen(title, infos)
-    print()
+from menu.exit import exit
+from menu.login import login
 
-def login(user:dict) -> dict:
-    # SCREEN:
-    title = 'login'
-    erro = None
-    return user
-
-def main_menu(user:dict) -> None:
+def main() -> None:
+    user = None
     # SCREEN:
     title = 'menu principal'
     username = ''
     erro = None
     while True:
         options = [
-        'sair',
-        'logar'
+            'sair',
+            'logar'
         ]
         if user:
             username = user['name']
             infos = f'bem vindo {username}. selecione uma das opções de serviços abaixo'
-            options.append(
+            options.extend([
                 'editar conta',
                 'minhas reservas',
                 'buscar livro'
-            )
+            ])
             if user['permission'] == 'admin' or user['permission'] == 'librarian':
                 options.append(
                     'gerenciar livros'
@@ -63,11 +54,7 @@ def main_menu(user:dict) -> None:
             exit(username)
             break
         if choiced == 2:
-            login(user)
-
-def main() -> None:
-    user = None
-    main_menu(user)
+            user = login()
 
 if __name__ == '__main__':
     main()

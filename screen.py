@@ -33,7 +33,8 @@ def draw_menu(options:list, screen_width:int) -> None:
     bar = f'\n{bar:^{screen_width}}'
     menu = bar
     for i, option in enumerate(options):
-        button = f'{d} {(i + 1):>2} {d} {option:^{option_width}} {d}'
+        option = str(option).title()
+        button = f'{d} {(i + 1):>2} {d} {option:<{option_width}} {d}'
         menu += f'\n{button:^{screen_width}}'
         menu += bar
     print(menu)

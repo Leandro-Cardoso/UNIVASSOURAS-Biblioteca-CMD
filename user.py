@@ -30,16 +30,17 @@ def remove_user(user:dict) -> None:
     except:
         log_erro(f'o usuário {name} não foi encontrado')
 
-def get_user(name:str) -> dict:
-    filepath = get_user_filepath(name)
+def get_user(username:str) -> dict|str:
+    filepath = get_user_filepath(username)
     try:
         with open(filepath, 'r', encoding = 'UTF-8') as file:
             content = file.read()
         user = loads(content)
         return user
     except:
-        log_erro(f'a pasta raiz "{USER_ROOT}" não foi encontrada')
-        return None
+        erro = f'o usuário {username} não foi encontrado'
+        log_erro(erro)
+        return erro
 
 if __name__ == '__main__':
     user = {

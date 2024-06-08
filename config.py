@@ -9,3 +9,7 @@ LOG_EXTENSION = 'txt'
 # USER:
 USER_ROOT = 'users'
 USER_EXTEXSION = 'json'
+
+# BOOK:
+BOOK_ROOT = 'books'
+BOOK_EXTEXSION = 'json'

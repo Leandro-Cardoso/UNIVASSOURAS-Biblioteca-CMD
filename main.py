@@ -1,5 +1,6 @@
 from screen import draw_screen
 from choice import make_choice
+
 # MENU:
 from menu.exit import exit
 from menu.create_account import create_account
@@ -23,8 +24,8 @@ def main() -> None:
             options.extend([
                 'relogar',
                 'perfil',
-                'minhas reservas',
-                'buscar livro'
+                'buscar livro',
+                'minhas reservas'
             ])
             if user['permission'] == 'admin' or user['permission'] == 'librarian':
                 options.append(

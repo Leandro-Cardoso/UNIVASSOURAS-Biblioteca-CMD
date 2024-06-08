@@ -35,7 +35,13 @@ def create_account() -> dict:
             erro = f'a senha do usuário "{username}" não pode ter menos de 6 caracteres'
             log_erro(erro)
         else:
-            break
+            # PASSWORD CONFIRMATION:
+            password2 = getpass('\n REPITA A SENHA: ')
+            if password2 == password:
+                break
+            else:
+                erro = f'a senha do usuário "{username}" não foi confirmada'
+                log_erro(erro)
     # CREATE:
     new_user = {
         'username' : username,

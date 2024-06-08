@@ -4,6 +4,7 @@ from choice import make_choice
 from menu.exit import exit
 from menu.create_account import create_account
 from menu.login import login
+from menu.profile import profile
 
 def main() -> None:
     user = None
@@ -18,10 +19,10 @@ def main() -> None:
         ]
         if user:
             username = user['username']
-            infos = f'bem vindo {username}. selecione uma das opções de serviços abaixo'
+            infos = f'bem vindo(a) {username}. selecione uma das opções de serviços abaixo'
             options.extend([
                 'relogar',
-                'editar conta',
+                'perfil',
                 'minhas reservas',
                 'buscar livro'
             ])
@@ -53,10 +54,12 @@ def main() -> None:
         if choiced == 1:
             exit(username)
             break
-        if choiced == 2:
+        elif choiced == 2:
             user = create_account()
-        if choiced == 3:
+        elif choiced == 3:
             user = login()
+        elif choiced == 4:
+            user = profile(user)
 
 if __name__ == '__main__':
     main()

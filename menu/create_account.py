@@ -46,7 +46,8 @@ def create_account() -> dict:
     new_user = {
         'username' : username,
         'password' : password,
-        'permission' : None
+        'permission' : None,
+        'books' : []
     }
     add_user(new_user)
     log('usuário criado', username)

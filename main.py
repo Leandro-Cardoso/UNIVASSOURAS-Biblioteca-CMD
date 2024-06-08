@@ -6,6 +6,7 @@ from menu.exit import exit
 from menu.create_account import create_account
 from menu.login import login
 from menu.profile import profile
+from menu.book_menu import book_menu
 
 def main() -> None:
     user = None
@@ -61,6 +62,12 @@ def main() -> None:
             user = login()
         elif choiced == 4:
             user = profile(user)
+        elif choiced == 5:
+            result = book_menu(user)
+            if isinstance(result, dict):
+                user = result
+            else:
+                erro = result
 
 if __name__ == '__main__':
     main()

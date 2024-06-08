@@ -50,11 +50,25 @@ def draw_erro(erro:str, screen_width:int) -> None:
     erro = f'\n{erro:{b}^{screen_width}}'
     print(erro)
 
-def draw_screen(title:str, infos:str = None, options:str = None, erro:str = None, width:int = 100):
+def draw_dict(dictionary:dict, screen_width:int, ignore:list = ['password', 'senha']) -> None:
+    b = '-'
+    bar = b * screen_width
+    text = ''
+    for key in dictionary.keys():
+        if not key in ignore:
+            value = dictionary[key]
+            key = str(key).title()
+            text += f'\n{key:>{screen_width // 2}} : {value}'
+    text = f'\n{text}\n\n{bar}'
+    print(text)
+
+def draw_screen(title:str, infos:str = None, options:str = None, erro:str = None, dictionary:dict = None, width:int = 100):
     os.system('cls')
     draw_title(title, width)
     if infos:
         draw_infos(infos, width)
+    if dictionary:
+        draw_dict(dictionary, width)
     if options:
         draw_menu(options, width)
     if erro:

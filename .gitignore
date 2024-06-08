@@ -1,4 +1,5 @@
 __pycache__
 logs/*
 users/*
+!users/admin.json
 books/*

@@ -17,9 +17,9 @@ def log(text:str, username:str = '') -> None:
     now = datetime.now()
     date = now.strftime('%Y-%m-%d')
     time = now.strftime('%H:%M:%S')
-    file_name = date + '.' + LOG_EXTENSION
-    file_path = path.join(path.basename(LOG_ROOT), path.basename(file_name))
-    with open(file_path, 'a', encoding = 'UTF-8') as file:
+    filename = date + '.' + LOG_EXTENSION
+    filepath = path.join(path.basename(LOG_ROOT), path.basename(filename))
+    with open(filepath, 'a', encoding = 'UTF-8') as file:
         file.write(f'{time} ({username}) -> {text}\n')
 
 def log_erro(text:str, username:str = '') -> None:

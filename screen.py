@@ -43,7 +43,9 @@ def draw_erro(erro:str, screen_width:int) -> None:
     b = '-'
     if not erro.endswith('.'):
         erro += '.'
-    erro = erro.capitalize()
+    words = erro.split(' ')
+    words[0] = words[0].capitalize()
+    erro = ' '.join(words)
     erro = f' [ERRO] -> {erro} '
     erro = f'\n{erro:{b}^{screen_width}}'
     print(erro)
@@ -57,14 +59,3 @@ def draw_screen(title:str, infos:str = None, options:str = None, erro:str = None
         draw_menu(options, width)
     if erro:
         draw_erro(erro, width)
-
-if __name__ == '__main__':
-    title = 'menu'
-    infos = 'essa é uma descrição inicial para o assunto abordado aquidasdnal sand ad nasdand çasdn açsd nas da sjnasjd alj da d asd a sldajh a sdhalsjd Alsd ja. Sdadubha sa dajsnda shd bfsdhfb shdfb s fhbsdfh basdfhba s dhfbasfhd bdasf basdfh basdf hbasdfh baskdhf bsdfh bsdkf bskdf hbaksd fhbakfh basdhfb asjdf hbaskdjh fbaskdjfh basdf hbsakdf hbasdfhbdsaj.'
-    options = [
-        'logar',
-        'criar',
-        'sair'
-    ]
-    erro = 'deu pau aqui'
-    draw_screen(title, infos, options, erro)

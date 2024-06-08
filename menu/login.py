@@ -11,7 +11,7 @@ def login() -> dict:
     while True:
         draw_screen(title, infos, options, erro)
         # USERNAME:
-        username = input('\nUSUÁRIO: ')
+        username = input('\n USUÁRIO: ')
         user = get_user(username)
         if isinstance(user, str):
             erro = user
@@ -22,7 +22,7 @@ def login() -> dict:
     while True:
         draw_screen(title, infos, options, erro)
         # PASSWORD:
-        password = input('\nSENHA: ')
+        password = input('\n SENHA: ')
         if password != user['password']:
             erro = f'a senha está incorreta'
             log_erro(erro, user['name'])

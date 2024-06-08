@@ -2,6 +2,7 @@ from screen import draw_screen
 from choice import make_choice
 # MENU:
 from menu.exit import exit
+from menu.create_account import create_account
 from menu.login import login
 
 def main() -> None:
@@ -12,10 +13,11 @@ def main() -> None:
     erro = None
     while True:
         options = [
-            'sair'
+            'sair',
+            'criar conta'
         ]
         if user:
-            username = user['name']
+            username = user['username']
             infos = f'bem vindo {username}. selecione uma das opções de serviços abaixo'
             options.extend([
                 'relogar',
@@ -32,10 +34,9 @@ def main() -> None:
                     'gerenciar usuários'
                 )
         else:
-            options.extend([
-                'logar',
-                'criar conta'
-            ])
+            options.append(
+                'logar'
+            )
             infos = 'faça o login ou registre-se para ter acesso aos nossos serviços'
         draw_screen(title, infos, options, erro)
         # CHOICE:
@@ -53,6 +54,8 @@ def main() -> None:
             exit(username)
             break
         if choiced == 2:
+            user = create_account()
+        if choiced == 3:
             user = login()
 
 if __name__ == '__main__':

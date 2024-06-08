@@ -1,7 +1,7 @@
 from log import log, log_erro
 
 def make_choice(options:list, username:str = '') -> int|str:
-    choiced = input('\nOPÇÃO: ')
+    choiced = input('\n OPÇÃO: ')
     try:
         choiced = int(choiced)
         n = len(options)

@@ -1,7 +1,6 @@
 from screen import draw_screen
 from choice import make_choice
-from log import log
-
+# MENU:
 from menu.exit import exit
 from menu.login import login
 
@@ -13,13 +12,13 @@ def main() -> None:
     erro = None
     while True:
         options = [
-            'sair',
-            'logar'
+            'sair'
         ]
         if user:
             username = user['name']
             infos = f'bem vindo {username}. selecione uma das opções de serviços abaixo'
             options.extend([
+                'relogar',
                 'editar conta',
                 'minhas reservas',
                 'buscar livro'
@@ -33,9 +32,10 @@ def main() -> None:
                     'gerenciar usuários'
                 )
         else:
-            options.append(
+            options.extend([
+                'logar',
                 'criar conta'
-            )
+            ])
             infos = 'faça o login ou registre-se para ter acesso aos nossos serviços'
         draw_screen(title, infos, options, erro)
         # CHOICE:

@@ -2,7 +2,7 @@ from os import path, remove
 from json import loads, dumps
 
 from config import USER_EXTEXSION, USER_ROOT
-from log import log, log_erro
+from log import log_erro
 
 def get_user_filepath(username:str) -> str:
     filename = f'{username}.{USER_EXTEXSION}'
@@ -17,7 +17,6 @@ def add_user(user:dict) -> None:
     try:
         with open(filepath, 'w', encoding = 'UTF-8') as file:
             file.write(user)
-        log(f'usuário "{username}" criado')
     except:
         log_erro(f'a pasta raiz "{USER_ROOT}" não foi encontrada')
 
@@ -26,7 +25,6 @@ def remove_user(user:dict) -> None:
     filepath = get_user_filepath(username)
     try:
         remove(filepath)
-        log(f'usuário "{username}" removido')
     except:
         log_erro(f'o usuário "{username}" não foi encontrado')
 

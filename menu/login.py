@@ -1,3 +1,5 @@
+from getpass import getpass
+
 from screen import draw_screen
 from user import get_user
 from log import log, log_erro
@@ -22,7 +24,7 @@ def login() -> dict:
     while True:
         draw_screen(title, infos, options, erro)
         # PASSWORD:
-        password = input('\n SENHA: ')
+        password = getpass('\n SENHA: ')
         if password != user['password']:
             erro = f'a senha está incorreta'
             log_erro(erro, user['name'])

@@ -19,12 +19,13 @@ def search_book(user:dict) -> dict|str:
         log(f'buscou o livro "{booktitle}"', username)
     return book
 
-def book_menu(user:dict) -> str:
+def book_menu(user:dict) -> dict:
     username= user['username']
     # SEARCH:
     book = search_book(user)
     if isinstance(book, str):
         return book
+    quantity = book['quantity']
     # SCREEN:
     title = 'livro'
     erro = None
@@ -34,14 +35,17 @@ def book_menu(user:dict) -> str:
             'nova busca'
         ]
         titles = []
-        books = list(user['books'])
+        if not user['books']:
+                user['books'] = []
+        books = user['books']
         for dictionary in books:
             titles.append(dictionary['title'])
         if not book['title'] in titles:
             options.append(
                 'reservar'
             )
-        draw_screen(title, options = options, erro = erro, dictionary = book)
+        book['quantity'] = quantity
+        draw_screen(title, options = options, erro = erro, dictionarys = book)
         # CHOICE:
         choiced = make_choice(options, username)
         # ERRO:
@@ -61,22 +65,14 @@ def book_menu(user:dict) -> str:
                 erro = book
         elif choiced == 3:
             book['quantity'] -= 1
+            quantity = book['quantity']
             if book['quantity'] <= 0:
                 remove_book(book)
-                book['quantity'] = 1
-                if user['books']:
-                    user['books'] = list(user['books']).append(book)
-                else:
-                    user['books'] = [book]
-                add_user(user)
-                log(f'o livro {book['title']} foi reservado', username)
-                break
             else:
                 add_book(book)
-                book['quantity'] = 1
-                if user['books']:
-                    user['books'] = list(user['books']).append(book)
-                else:
-                    user['books'] = [book]
-                add_user(user)
-                log(f'o livro {book['title']} foi reservado', username)
+            reserved = book
+            reserved['quantity'] = 1
+            user['books'].append(reserved)
+            add_user(user)
+            log(f'o livro {reserved['title']} foi reservado', username)
+    return user

@@ -62,13 +62,19 @@ def draw_dict(dictionary:dict, screen_width:int, ignore:list = ['password', 'sen
     text = f'\n{text}\n\n{bar}'
     print(text)
 
-def draw_screen(title:str, infos:str = None, options:str = None, erro:str = None, dictionary:dict = None, width:int = 100):
+def draw_dicts(dictionarys:list, screen_width:int, ignore:list = ['password', 'senha']) -> None:
+    for dictionary in dictionarys:
+        draw_dict(dictionary, screen_width, ignore)
+
+def draw_screen(title:str, infos:str = None, options:str = None, erro:str = None, dictionarys:dict|list = None, width:int = 100):
     os.system('cls')
     draw_title(title, width)
     if infos:
         draw_infos(infos, width)
-    if dictionary:
-        draw_dict(dictionary, width)
+    if dictionarys:
+        if isinstance(dictionarys, dict):
+            dictionarys = [dictionarys]
+        draw_dicts(dictionarys, width)
     if options:
         draw_menu(options, width)
     if erro:

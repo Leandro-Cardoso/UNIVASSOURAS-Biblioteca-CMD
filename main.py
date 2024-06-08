@@ -7,6 +7,7 @@ from menu.create_account import create_account
 from menu.login import login
 from menu.profile import profile
 from menu.book_menu import book_menu
+from menu.reservations import reservations
 
 def main() -> None:
     user = None
@@ -64,10 +65,14 @@ def main() -> None:
             user = profile(user)
         elif choiced == 5:
             result = book_menu(user)
-            if isinstance(result, dict):
-                user = result
-            else:
+            if not isinstance(result, dict):
                 erro = result
+        elif choiced == 6:
+            reservations(user)
+        elif choiced == 7:
+            pass
+        elif choiced == 8:
+            pass
 
 if __name__ == '__main__':
     main()

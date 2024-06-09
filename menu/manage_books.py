@@ -10,7 +10,8 @@ def manage_books(user:dict) -> dict:
         'voltar',
         'adicionar livros',
         'remover livros',
-        'devolver reserva'
+        'devolver reserva',
+        'listar livros'
     ]
     erro = None
     while True:
@@ -30,5 +31,7 @@ def manage_books(user:dict) -> dict:
         elif choiced == 3:
             pass
         elif choiced == 4:
+            pass
+        elif choiced == 5:
             pass
     return user

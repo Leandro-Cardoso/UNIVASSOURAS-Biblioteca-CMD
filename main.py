@@ -8,6 +8,8 @@ from menu.login import login
 from menu.profile import profile
 from menu.book_menu import book_menu
 from menu.reservations import reservations
+from menu.manage_books import manage_books
+from menu.manage_users import manage_users
 
 def main() -> None:
     user = None
@@ -70,9 +72,9 @@ def main() -> None:
         elif choiced == 6:
             reservations(user)
         elif choiced == 7:
-            pass
+            user = manage_books(user)
         elif choiced == 8:
-            pass
+            user = manage_users(user)
 
 if __name__ == '__main__':
     main()

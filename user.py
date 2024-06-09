@@ -1,4 +1,4 @@
-from os import path, remove
+from os import path, remove, listdir
 from json import loads, dumps
 
 from config import USER_EXTEXSION, USER_ROOT
@@ -38,3 +38,14 @@ def get_user(username:str) -> dict|str:
     except:
         erro = f'o usuário "{username}" não foi encontrado'
         return erro
+    
+def list_users(dir:str = USER_ROOT, ext:str = USER_EXTEXSION) -> list:
+    ext = f'.{ext}'
+    files = listdir(dir)
+    usernames = []
+    for filename in files:
+        if filename.endswith(ext):
+            username = filename.replace(ext, '')
+            username = username.replace('_', ' ')
+            usernames.append(username)
+    return usernames

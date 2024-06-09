@@ -39,7 +39,7 @@ def get_book(title:str) -> dict|str:
         erro = f'o livro "{title}" não foi encontrado'
         return erro
 
-def listbooks(dir:str = BOOK_ROOT, ext:str = BOOK_EXTEXSION) -> list:
+def list_books(dir:str = BOOK_ROOT, ext:str = BOOK_EXTEXSION) -> list:
     ext = f'.{ext}'
     files = listdir(dir)
     titles = []

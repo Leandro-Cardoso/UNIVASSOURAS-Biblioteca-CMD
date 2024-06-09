@@ -12,6 +12,7 @@ def search_book(user:dict) -> dict|str:
     draw_screen(title, infos)
     # TITLE:
     booktitle = input('\n LIVRO: ')
+    booktitle = booktitle.title()
     book = get_book(booktitle)
     if isinstance(book, str):
         log_erro(book, username)

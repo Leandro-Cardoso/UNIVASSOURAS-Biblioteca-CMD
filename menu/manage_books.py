@@ -1,6 +1,6 @@
 from screen import draw_screen
 from choice import make_choice
-from book import get_book, add_book
+from book import get_book, add_book, remove_book
 from log import log, log_erro
 
 def add_books(user:dict) -> None:
@@ -55,17 +55,44 @@ def add_books(user:dict) -> None:
     log(f'o livro "{booktitle}" foi adicionado', username)
 
 def remove_books(user:dict) -> None:
+    username = user['username']
     # SCREEN:
     title = 'remover livros'
     infos = 'digite o titulo do livro e a quantidade para remover do acervo de livros'
     erro = None
     book = None
+    # BOOK:
+    while True:
+        draw_screen(title, infos, erro = erro)
+        booktitle = input('\n LIVRO: ')
+        booktitle = booktitle.title()
+        book = get_book(booktitle)
+        if isinstance(book, dict):
+            erro = None
+            break
+        erro = f'o livro "{booktitle}" não foi encontrado'
+        log_erro(erro, username)
+    # QUANTITY:
     while True:
         draw_screen(title, infos, erro = erro, dictionarys = book)
-        # BOOK:
-        booktitle = input('\n LIVRO: ')
-        book = get_book(booktitle)
-        break
+        quantity = input('\n QUANTIDADE: ')
+        if quantity.isnumeric():
+            quantity = int(quantity)
+            if quantity > 0:
+                break
+            else:
+                erro = f'a quantidade "{quantity}" precisa ser maior que 0'
+                log_erro(erro, username)
+        else:
+            erro = f'a quantidade "{quantity}" não é um número inteiro'
+            log_erro(erro, username)
+    book['quantity'] -= quantity
+    # SET:
+    if book['quantity'] < 1:
+        remove_book(book)
+    else:
+        add_book(book)
+    log(f'o livro "{booktitle}" foi removido', username)
 
 def return_reserved_book(user:dict) -> dict:
     # SCREEN:

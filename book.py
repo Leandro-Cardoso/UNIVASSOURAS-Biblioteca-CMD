@@ -1,4 +1,4 @@
-from os import path, remove
+from os import path, remove, listdir
 from json import dumps, loads
 
 from config import BOOK_EXTEXSION, BOOK_ROOT
@@ -38,3 +38,14 @@ def get_book(title:str) -> dict|str:
     except:
         erro = f'o livro "{title}" não foi encontrado'
         return erro
+
+def listbooks(dir:str = BOOK_ROOT, ext:str = BOOK_EXTEXSION) -> list:
+    ext = f'.{ext}'
+    files = listdir(dir)
+    titles = []
+    for filename in files:
+        if filename.endswith(ext):
+            title = filename.replace(ext, '')
+            title = title.replace('_', ' ')
+            titles.append(title)
+    return titles

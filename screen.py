@@ -1,5 +1,6 @@
 import os
 import textwrap
+import platform
 
 def draw_title(title:str, screen_width:int) -> None:
     h = '|'
@@ -67,7 +68,11 @@ def draw_dicts(dictionarys:list, screen_width:int, ignore:list = ['password', 's
         draw_dict(dictionary, screen_width, ignore)
 
 def draw_screen(title:str, infos:str = None, options:str = None, erro:str = None, dictionarys:dict|list = None, width:int = 100):
-    os.system('cls')
+    os_name = platform.system()
+    if os_name == 'Windows':
+        os.system('cls')
+    else:
+        os.system('clear')
     draw_title(title, width)
     if infos:
         draw_infos(infos, width)

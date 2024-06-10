@@ -15,6 +15,7 @@ def change_username(user:dict) -> dict:
         draw_screen(title, infos, options, erro)
         # USERNAME:
         username = input('\n NOVO USUÁRIO: ')
+        username = username.title()
         registered_user = get_user(username)
         if len(username) < 3:
             erro = f'o usuário "{username}" não pode ter menos de 3 caracteres'
@@ -49,6 +50,7 @@ def change_password(user:dict) -> dict:
         draw_screen(title, infos, options, erro)
         # PASSWORD:
         username = user['username']
+        username = str(username).title()
         password = getpass('\n NOVA SENHA: ')
         if len(password) < 6:
             erro = f'a senha do usuário "{username}" não pode ter menos de 6 caracteres'
@@ -69,6 +71,8 @@ def change_password(user:dict) -> dict:
     return user
 
 def profile(user:dict) -> dict:
+    username = user['username']
+    username = str(username).title()
     # SCREEN:
     title = f'perfil'
     infos = None
@@ -83,7 +87,7 @@ def profile(user:dict) -> dict:
     while True:
         draw_screen(title, infos, options, erro, user)
         # CHOICE:
-        choiced = make_choice(options, user['username'])
+        choiced = make_choice(options, username)
         # ERRO:
         if isinstance(choiced, str):
             erro = choiced

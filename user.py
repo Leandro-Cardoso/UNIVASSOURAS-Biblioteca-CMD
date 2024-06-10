@@ -10,6 +10,7 @@ def get_userpath(username:str) -> str:
     return filepath
 
 def add_user(user:dict) -> None:
+    user['username'] = str(user['username']).lower()
     username = user['username']
     filepath = get_userpath(username)
     user = dumps(user)
@@ -21,6 +22,7 @@ def add_user(user:dict) -> None:
         log_erro(f'a pasta raiz "{USER_ROOT}" não foi encontrada')
 
 def remove_user(user:dict) -> None:
+    user['username'] = str(user['username']).lower()
     username = user['username']
     filepath = get_userpath(username)
     try:
@@ -29,6 +31,7 @@ def remove_user(user:dict) -> None:
         log_erro(f'o usuário "{username}" não foi encontrado')
 
 def get_user(username:str) -> dict|str:
+    username = username.lower()
     filepath = get_userpath(username)
     try:
         with open(filepath, 'r', encoding = 'UTF-8') as file:

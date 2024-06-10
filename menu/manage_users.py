@@ -3,6 +3,7 @@ from choice import make_choice
 
 def manage_users(user:dict) -> dict:
     username = user['username']
+    username = str(username).title()
     # SCREEN:
     title = 'gerenciar usuários'
     infos = 'selecione a opção de gerenciamendo de usuários desejada'

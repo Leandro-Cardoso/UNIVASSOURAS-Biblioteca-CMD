@@ -3,6 +3,7 @@ from choice import make_choice
 
 def reservations(user:dict) -> None:
     username = user['username']
+    username = str(username).title()
     # SCREEN:
     title = 'minhas reservas'
     options = [

@@ -14,6 +14,7 @@ def login() -> dict:
         draw_screen(title, infos, options, erro)
         # USERNAME:
         username = input('\n USUÁRIO: ')
+        username = username.title()
         user = get_user(username)
         if isinstance(user, str):
             erro = user

@@ -5,6 +5,7 @@ from log import log, log_erro
 
 def add_books(user:dict) -> None:
     username = user['username']
+    username = str(username).title()
     # SCREEN:
     title = 'adicionar livros'
     infos = 'digite as informações abaixo pedidas e necessárias para adicionar um novo livro ou adicionar mais unidades'
@@ -56,6 +57,7 @@ def add_books(user:dict) -> None:
 
 def remove_books(user:dict) -> None:
     username = user['username']
+    username = str(username).title()
     # SCREEN:
     title = 'remover livros'
     infos = 'digite o titulo do livro e a quantidade para remover do acervo de livros'
@@ -95,6 +97,8 @@ def remove_books(user:dict) -> None:
     log(f'o livro "{booktitle}" foi removido', username)
 
 def return_reserved_book(user:dict) -> dict:
+    username = user['username']
+    username = str(username).title()
     # SCREEN:
     title = 'devolver livro reservado'
     infos = 'digite o nome do usuário e o titulo do livro para realizar a devolução ao acervo de livros'
@@ -105,6 +109,9 @@ def return_reserved_book(user:dict) -> dict:
     return user
 
 def list_books(user:dict) -> None:
+    username = user['username']
+    username = str(username).title()
+    # SCREEN:
     title = 'listar livros'
     options = [
         ''
@@ -117,6 +124,7 @@ def list_books(user:dict) -> None:
 
 def manage_books(user:dict) -> dict:
     username = user['username']
+    username = str(username).title()
     # SCREEN:
     title = 'gerenciar livros'
     infos = 'selecione a opção de gerenciamendo de livros desejada'

@@ -14,6 +14,7 @@ def create_account() -> dict:
         draw_screen(title, infos, options, erro)
         # USERNAME:
         username = input('\n USUÁRIO: ')
+        username = username.title()
         user = get_user(username)
         if len(username) < 3:
             erro = f'o usuário "{username}" não pode ter menos de 3 caracteres'

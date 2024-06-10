@@ -11,6 +11,7 @@ def get_bookpath(title:str) -> str:
     return filepath
 
 def add_book(book:dict) -> None:
+    book['title'] = str(book['title']).lower()
     title = book['title']
     bookpath = get_bookpath(title)
     book = str(dumps(book))
@@ -21,6 +22,7 @@ def add_book(book:dict) -> None:
         log_erro(f'a pasta raiz "{BOOK_ROOT}" não foi encontrada')
 
 def remove_book(book:dict) -> None:
+    book['title'] = str(book['title']).lower()
     title = book['title']
     bookpath = get_bookpath(title)
     try:
@@ -29,6 +31,7 @@ def remove_book(book:dict) -> None:
         log_erro(f'o livro "{title}" não foi encontrado')
 
 def get_book(title:str) -> dict|str:
+    title = title.lower()
     bookpath = get_bookpath(title)
     try:
         with open(bookpath, 'r', encoding = 'UTF-8') as file:

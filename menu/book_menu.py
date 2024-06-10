@@ -6,13 +6,13 @@ from user import add_user
 
 def search_book(user:dict) -> dict|str:
     username= user['username']
+    username = str(username).title()
     # SCREEN:
     title = 'buscar livro'
     infos = 'digite o titulo do livro que busca'
     draw_screen(title, infos)
     # TITLE:
     booktitle = input('\n LIVRO: ')
-    booktitle = booktitle.title()
     book = get_book(booktitle)
     if isinstance(book, str):
         log_erro(book, username)
@@ -21,7 +21,8 @@ def search_book(user:dict) -> dict|str:
     return book
 
 def book_menu(user:dict) -> dict:
-    username= user['username']
+    username = user['username']
+    username = str(username).title()
     # SEARCH:
     book = search_book(user)
     if isinstance(book, str):
@@ -75,5 +76,6 @@ def book_menu(user:dict) -> dict:
             reserved['quantity'] = 1
             user['books'].append(reserved)
             add_user(user)
-            log(f'o livro {reserved['title']} foi reservado', username)
+            reserved_title = reserved['title']
+            log(f'o livro {reserved_title} foi reservado', username)
     return user

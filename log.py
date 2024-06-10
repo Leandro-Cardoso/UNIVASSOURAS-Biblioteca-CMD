@@ -5,6 +5,7 @@ from config import LOG_ROOT, LOG_EXTENSION
 
 def log(text:str, username:str = '') -> None:
     '''Salva o log em um arquivo TXT.'''
+    username = username.title()
     words = text.split(' ')
     if '[ERRO]' in words:
         i = 1

@@ -1,4 +1,4 @@
-from os import path, remove, listdir
+from os import path, remove, listdir, makedirs
 from json import loads, dumps
 
 from config import USER_EXTEXSION, USER_ROOT
@@ -16,6 +16,10 @@ def add_user(user:dict) -> None:
     user = dumps(user)
     user = str(user)
     try:
+        # Check root:
+        if not path.exists(USER_ROOT):
+            makedirs(USER_ROOT)
+        # Save file:
         with open(filepath, 'w', encoding = 'UTF-8') as file:
             file.write(user)
     except:

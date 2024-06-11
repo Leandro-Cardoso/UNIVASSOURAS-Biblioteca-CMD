@@ -1,4 +1,4 @@
-from os import path, remove, listdir
+from os import path, remove, listdir, makedirs
 from json import dumps, loads
 
 from config import BOOK_EXTEXSION, BOOK_ROOT
@@ -16,6 +16,10 @@ def add_book(book:dict) -> None:
     bookpath = get_bookpath(title)
     book = str(dumps(book))
     try:
+        # Check root:
+        if not path.exists(BOOK_ROOT):
+            makedirs(BOOK_ROOT)
+        # Save file:
         with open(bookpath, 'w', encoding = 'UTF-8') as file:
             file.write(book)
     except:

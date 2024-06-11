@@ -16,6 +16,7 @@ def add_books(user:dict) -> None:
     booktitle = booktitle.title()
     book = get_book(booktitle)
     if isinstance(book, dict):
+        # EDIT:
         while True:
             draw_screen(title, infos, erro = erro, dictionarys = book)
             quantity = input('\n QUANTIDADE: ')
@@ -31,6 +32,7 @@ def add_books(user:dict) -> None:
                 erro = f'a quantidade "{quantity}" não é um número inteiro'
                 log_erro(erro, username)
     else:
+        # CREATE:
         book = {}
         book['title'] = booktitle
         draw_screen(title, infos, erro = erro)

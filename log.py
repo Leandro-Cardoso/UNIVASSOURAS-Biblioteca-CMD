@@ -1,5 +1,5 @@
 from datetime import datetime
-from os import path
+from os import path, makedirs
 
 from config import LOG_ROOT, LOG_EXTENSION
 
@@ -20,6 +20,10 @@ def log(text:str, username:str = '') -> None:
     time = now.strftime('%H:%M:%S')
     filename = date + '.' + LOG_EXTENSION
     filepath = path.join(path.basename(LOG_ROOT), path.basename(filename))
+    # Check root:
+    if not path.exists(LOG_ROOT):
+        makedirs(LOG_ROOT)
+    # Save file:
     with open(filepath, 'a', encoding = 'UTF-8') as file:
         file.write(f'{time} ({username}) -> {text}\n')
 

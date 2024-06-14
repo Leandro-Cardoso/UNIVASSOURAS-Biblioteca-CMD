@@ -2,6 +2,7 @@ from screen import draw_screen
 from choice import make_choice
 from book import get_book, add_book, remove_book
 from log import log, log_erro
+from user import get_user, add_user
 
 def add_books(user:dict) -> None:
     username = user['username']
@@ -105,9 +106,33 @@ def return_reserved_book(user:dict) -> dict:
     title = 'devolver livro reservado'
     infos = 'digite o nome do usuário e o titulo do livro para realizar a devolução ao acervo de livros'
     erro = None
+    # CLIENT:
     while True:
         draw_screen(title, infos, erro = erro)
-        break
+        clientname = input('\n USUÁRIO: ')
+        clientname = clientname.title()
+        client = get_user(clientname)
+        if isinstance(client, dict):
+            erro = None
+            break
+        erro = f'o usuário "{clientname}" não foi encontrado'
+        log_erro(erro, username)
+    # BOOK:
+    while True:
+        draw_screen(title, infos, erro = erro)
+        booktitle = input('\n LIVRO: ')
+        booktitle = booktitle.title()
+        book = get_book(booktitle)
+        if isinstance(book, dict):
+            erro = None
+            break
+        erro = f'o titulo "{booktitle}" não foi encontrado'
+        log_erro(erro, username)
+    # SET:
+    client['books'] = list(client['books']).remove(book)
+    add_user(client)
+    book['quantity'] += 1
+    add_book(book)
     return user
 
 def list_books(user:dict) -> None:

@@ -1,7 +1,7 @@
 setlocal EnableDelayedExpansion
 set X=100
 set Y=30
-set PYTHON=python
+set PYTHON="C:\Users\UNIVASSOURAS\AppData\Local\Programs\Python\Python311\python"
 set FILE=main.py
 
 rem Console size:
